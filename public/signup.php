@@ -47,11 +47,11 @@
 
                     <div class="right">
                         <label class="label text-xl">Phone Number: </label> <br>
-                        <p id="signup-phone-error"></p>
-                        <input id="signup-phone" type="text" class="input" placeholder="01XXXXXXXXX" />
+                        <p id="signup-mobile-error"></p>
+                        <input id="signup-mobile" type="text" class="input" placeholder="01XXXXXXXXX" />
                         <label class="label text-xl">Avatar: </label> <br>
-                        <p id="signup-photo-error"></p>
-                        <input id="signup-photo" type="text" accept="image/*" class="input" placeholder="Enter your profile photo" />
+                        <p id="signup-avatar-error"></p>
+                        <input id="signup-avatar" type="file" accept="image/*" class="input" placeholder="Enter your profile photo" />
                         <label class="label text-xl">Address: </label> <br>
                         <p id="signup-address-error"></p>
                         <input id="signup-address" type="text" class="input" placeholder="Enter your address" />
