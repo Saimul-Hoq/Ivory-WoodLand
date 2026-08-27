@@ -1,0 +1,26 @@
+.body-area{
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldset-container{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+input{
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.card{
+    width: 80%;
+}
+
+.card-start{
+    width: 40%;
+}
+
+.btn{
+    width: 100%;
+}

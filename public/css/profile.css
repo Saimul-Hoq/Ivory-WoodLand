@@ -1,0 +1,64 @@
+.input{
+    border-radius: 999px;
+}
+
+.body-area{
+    background-color: #d6cab4;
+    justify-content: center;
+    align-items: center;
+}
+.fieldset{
+    position: absolute;
+    background-color: #dfd7c6;
+    border: 1px solid #392b12;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+    opacity: 1;
+    transition: transform 0.5s, opacity 0.5s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.info-field{
+    display: flex;
+    align-items: center;
+    width: 15rem;
+    justify-content: space-between;
+    margin: 3rem;
+    gap: 0.5rem;
+}
+
+.edit{
+    opacity: 0.3;
+    /* transform: translateX(-170px); */
+    transform: scale(0.75);
+}
+
+.edit-field{
+    position: absolute;
+    flex-direction: column;
+    width: 30%;
+    align-self: flex-end;
+    opacity: 0;
+    z-index: -1;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+
+
+.edit-field.edit-cards{
+    transform: translateX(-100%);
+    opacity: 1;
+    z-index: 2;
+}
+
+.edit-field .btn-container{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.edit-field .btn-container button{
+    /* border-radius: 15px; */
+    width: 40%;
+    margin: 1rem 0 0 0;
+}
