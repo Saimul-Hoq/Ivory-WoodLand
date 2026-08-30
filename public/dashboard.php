@@ -1,3 +1,13 @@
+<?php
+    require_once(__DIR__."/../app/config/session.inc.php");
+
+    if(!isset($_SESSION["id"])){
+        header("Location: login.php");
+        exit();
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +71,7 @@
                                     <span>></span>
                                 </a>
 
-                                <a href="./login.php">
+                                <a href="./logout.php">
                                     <div class="li-content">
                                         <i class="fa-solid fa-right-from-bracket text-gray"></i>
                                         <p class="text-semibold">Logout</p>
