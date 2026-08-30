@@ -36,7 +36,7 @@ signupBtn.addEventListener("click", async (e) => {
 
         if(result.success){
             alert("Account Successfully Created");
-            Window.location.href = "login.php";
+            window.location.href = "login.php";
         }
         else{
             if(result.message){

@@ -6,7 +6,7 @@
 .fieldset-container{
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    justify-content: space-between;
 }
 input{
     width: 90%;
@@ -23,4 +23,11 @@ input{
 
 .btn{
     width: 100%;
+}
+
+.left{
+    width: 47%;
+}
+.right{
+    width: 47%;
 }
