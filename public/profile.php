@@ -1,3 +1,20 @@
+<?php
+    require_once(__DIR__."/../app/config/session.inc.php");
+    require_once(__DIR__."/../app/config/database.inc.php");
+    require_once(__DIR__."/../app/controllers/getUser_controller.inc.php");
+
+
+
+    if(!isset($_SESSION["id"])){
+        header("Location: login.php");
+        exit();
+    }
+
+    $user = getUserFromModel($pdo, $_SESSION["id"]);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +49,7 @@
             
             <div class="profile-left">
                 <div class="info-field">
-                    <p><span class="text-bold">Name: </span>Saimul Hoque</p>
+                    <p><span class="text-bold">Name: </span> <?php echo htmlspecialchars($user["name"]??"") ?> </p>
                     <button id="profile-changeName-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
                     
                 </div>
@@ -43,7 +60,7 @@
                 </div>
 
                 <div class="info-field">
-                    <p><span class="text-bold">Email: </span>saimulhoque2000@gmail.com</p>
+                    <p><span class="text-bold">Email: </span>  <?php echo htmlspecialchars($user["email"] ?? "") ?> </p>
                     <!-- <button class="btn-icon"><i class="fa-solid fa-angle-right text-xl"></i></button> -->
                 </div>
               
@@ -52,16 +69,16 @@
             <div class="profile-right">
                 
                 <div class="info-field">
-                    <p><span class="text-bold">Mobile: </span>01717171717</p>
+                    <p><span class="text-bold">Mobile: </span>  <?php echo htmlspecialchars($user["mobile"] ?? "") ?> </p>
                     <button id="profile-changeMobile-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md   "></i></button>
                 </div>
 
                 <div class="info-field">
-                    <p><span class="text-bold">Total purchase amount: </span>0 tk</p>
+                    <p><span class="text-bold">Total purchase amount: </span>  <?php echo htmlspecialchars($user["amount"] ?? "") ?> tk</p>
                     <!-- <button class="btn-icon"><i class="fa-solid fa-angle-right text-xl   "></i></button> -->
                 </div>
                 <div class="info-field">
-                    <p><span class="text-bold">Address: </span>House-1(Shefaly Garden), Road-4, Kallyanpur, Dhaka</p>
+                    <p><span class="text-bold">Address: </span>  <?php echo htmlspecialchars($user["address"] ?? "") ?> </p>
                     <button id="profile-changeAddress-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
                 </div>
              
@@ -70,17 +87,21 @@
         </fieldset>
 
         <fieldset id="edit-password" class="fieldset edit-field">
+            <label class="label  text-xl">Current Password: </label>
+            <p id="profile-currentPassword-error"></p>
+            <input id="profile-currentPassword"  type="password" class="input" placeholder="Enter current password" />
+
             <label class="label  text-xl">New Password: </label>
-            <p id="login-password-error"></p>
-            <input id="login-password"  type="password" class="input" placeholder="Enter new password" />
+            <p id="profile-newPassword-error"></p>
+            <input id="profile-newPassword"  type="password" class="input" placeholder="Enter new password" />
 
             <label class="label  text-xl">Confirm Password: </label>
-            <p id="login-password-error"></p>
-            <input id="login-password"  type="password" class="input" placeholder="Confirm your password" />
+            <p id="profile-confirmPassword-error"></p>
+            <input id="profile-confirmPassword"  type="password" class="input" placeholder="Confirm new password" />
 
             <div class="btn-container">
-                <button id="profile-cancelPass-btn" class="btn btn-neutral">Cancel</button>
-                <button id="profile-savePass-btn" class="btn btn-primary">Save</button>
+                <button id="profile-cancelPassword-btn" class="btn btn-neutral">Cancel</button>
+                <button id="profile-savePassword-btn" class="btn btn-primary">Save</button>
             </div>
 
         </fieldset>
@@ -122,6 +143,6 @@
         </fieldset>
     </div>
 
-    <script src="./js/profile.js"></script>
+    <script type="module" src="./js/profile.js"></script>
 </body>
 </html>
