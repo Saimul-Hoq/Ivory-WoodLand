@@ -13,9 +13,7 @@ if(!isset($_SESSION["id"])){
     die();
 }
 
-$currentPassword = trim($_POST["currentPassword"]?? "");
-$newPassword = trim($_POST["newPassword"]?? "");
-$confirmPassword = trim($_POST["confirmPassword"]?? "");
+$newAddress = trim($_POST["newAddress"]?? "");
 
 try{
 
@@ -26,34 +24,16 @@ try{
     $errors = [];
 
     //isEmpty:
-    if(isInputEmpty($errors, $currentPassword, $newPassword, $confirmPassword)){
+    if(isAddressEmpty($errors, $newAddress)){
         echo json_encode(["success" => false, "errors" => $errors]);
         die();
     }
 
-    //is Current Password Invalid:
-    if(isUserInvalid($errors, $pdo, $_SESSION["id"], $currentPassword)){
-        echo json_encode(["success" => false, "errors" => $errors]);
-        die();
-    }
-
-    //Is New Password Invalid:
-    if(isPasswordInvalid($errors, $newPassword)){
-        echo json_encode(["success" => false, "errors" => $errors]);
-        die();
-    }
-
-    //Is Confirm Password Invalid:
-    if(isConfirmPasswordInvalid($errors, $newPassword, $confirmPassword)){
-        echo json_encode(["success" => false, "errors" => $errors]);
-        die();
-    }
-
-    //Edit Password:
-    changePassword($pdo, $_SESSION["id"], $newPassword);
+    //Edit Address:
+    changeAddress($pdo, $_SESSION["id"], $newAddress);
 
     echo json_encode(["success" => true]);
-    
+
 
 }
 catch(PDOException $e){
@@ -61,5 +41,3 @@ catch(PDOException $e){
     echo json_encode(["success" => false, "message" => "Something Went Wrong"]);
     die();
 }
-
-

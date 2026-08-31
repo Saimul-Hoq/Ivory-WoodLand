@@ -45,7 +45,7 @@ try{
         $avatarFilename =  "default.png";
     }
 
-    if(isEmailInvalid($errors, $email) || isMobileInvalid($errors, $mobile) || isPasswordInvalid($errors, $password)){
+    if(isNameInvalid($errors, $name) || isEmailInvalid($errors, $email) || isMobileInvalid($errors, $mobile) || isPasswordInvalid($errors, $password)){
         echo json_encode(["success" => false, "errors" => $errors]);
         die();
     }

@@ -116,6 +116,22 @@ function isPasswordInvalid(&$errors, $password){
     }
 }
 
+function isNameInvalid(&$errors, $name){
+    if(strlen($name) < 2){
+        $errors["name"] = "Name must be at least 2 characters";
+        return true;
+    }
+    if(strlen($name) > 50){
+        $errors["name"] = "Name must be less than 50 characters";
+        return true;
+    }
+    if(!preg_match("/^[a-zA-Z\s.'-]+$/", $name)){
+        $errors["name"] = "Name contains invalid characters";
+        return true;
+    }
+    return false;
+}
+
 function createUser( $pdo,  $id,  $email,  $password,  $name,  $mobile,  $address,  $amount,  $avatar,  $role,  $registered_by){
     setUser($pdo,  $id,  $email,  $password,  $name,  $mobile,  $address,  $amount,  $avatar,  $role,  $registered_by);
 }

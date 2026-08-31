@@ -13,9 +13,7 @@ if(!isset($_SESSION["id"])){
     die();
 }
 
-$currentPassword = trim($_POST["currentPassword"]?? "");
-$newPassword = trim($_POST["newPassword"]?? "");
-$confirmPassword = trim($_POST["confirmPassword"]?? "");
+$newMobile = trim($_POST["newMobile"]?? "");
 
 try{
 
@@ -26,34 +24,34 @@ try{
     $errors = [];
 
     //isEmpty:
-    if(isInputEmpty($errors, $currentPassword, $newPassword, $confirmPassword)){
+    if(isMobileEmpty($errors, $newMobile)){
         echo json_encode(["success" => false, "errors" => $errors]);
         die();
     }
 
-    //is Current Password Invalid:
-    if(isUserInvalid($errors, $pdo, $_SESSION["id"], $currentPassword)){
+    //Is Mobile Invalid (format):
+    if(isMobileInvalid($errors, $newMobile)){
         echo json_encode(["success" => false, "errors" => $errors]);
         die();
     }
 
-    //Is New Password Invalid:
-    if(isPasswordInvalid($errors, $newPassword)){
+    //If same as current mobile, do nothing, just return success:
+    if(isSameMobile($pdo, $_SESSION["id"], $newMobile)){
+        echo json_encode(["success" => true]);
+        die();
+    }
+
+    //Is Mobile Already Taken:
+    if(isMobileTaken($errors, $pdo, $_SESSION["id"], $newMobile)){
         echo json_encode(["success" => false, "errors" => $errors]);
         die();
     }
 
-    //Is Confirm Password Invalid:
-    if(isConfirmPasswordInvalid($errors, $newPassword, $confirmPassword)){
-        echo json_encode(["success" => false, "errors" => $errors]);
-        die();
-    }
-
-    //Edit Password:
-    changePassword($pdo, $_SESSION["id"], $newPassword);
+    //Edit Mobile:
+    changeMobile($pdo, $_SESSION["id"], $newMobile);
 
     echo json_encode(["success" => true]);
-    
+
 
 }
 catch(PDOException $e){
@@ -61,5 +59,3 @@ catch(PDOException $e){
     echo json_encode(["success" => false, "message" => "Something Went Wrong"]);
     die();
 }
-
-

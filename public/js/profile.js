@@ -1,5 +1,5 @@
 import { setFieldError, clearAllErrors } from "./errorMessageHandler.js";
-const fieldIds = ["currentPassword", , "newPassword", "confirmPassword"];
+const fieldIds = ["currentPassword", "newPassword", "confirmPassword", "editName", "editMobile", "editAddress"];
 
 
 let profileBlock = document.querySelector("#profile-block");
@@ -91,6 +91,9 @@ savePassBtn.addEventListener("click", async (e) => {
         else{
             if(result.message){
                 alert(result.message);
+                if(result.auth){
+                    window.location.replace("login.php");
+                }
             }
             else if(result.errors){
                 Object.entries(result.errors).forEach(([id, msg]) => {
@@ -110,6 +113,162 @@ savePassBtn.addEventListener("click", async (e) => {
         savePassBtn.innerText = "Save";
     }
 })
+
+
+const saveNameBtn = document.querySelector("#profile-saveName-btn");
+
+saveNameBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    clearAllErrors(fieldIds, "profile-");
+    saveNameBtn.disabled = true;
+    saveNameBtn.innerText = "Saving...";
+
+    const newNameVal = document.querySelector("#profile-editName").value.trim();
+
+    try{
+
+        const formData = new FormData();
+        formData.append("newName", newNameVal);
+
+        const response = await fetch("../app/api/updateName.inc.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+            location.reload();
+        }
+        else{
+            if(result.message){
+                alert(result.message);
+                if(result.auth){
+                    window.location.replace("login.php");
+                }
+            }
+            else if(result.errors){
+                Object.entries(result.errors).forEach(([id, msg]) => {
+                    setFieldError(id, msg, "profile-");
+                })
+            }
+            else{
+                alert("Something Went Wrong. Please try again later");
+            }
+        }
+
+    }catch(err){
+        console.error("profile Error: ",err);
+        alert("Something went wrong. Please try again later");
+    }finally{
+        saveNameBtn.disabled = false;
+        saveNameBtn.innerText = "Save";
+    }
+})
+
+
+const saveMobileBtn = document.querySelector("#profile-saveMobile-btn");
+
+saveMobileBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    clearAllErrors(fieldIds, "profile-");
+    saveMobileBtn.disabled = true;
+    saveMobileBtn.innerText = "Saving...";
+
+    const newMobileVal = document.querySelector("#profile-editMobile").value.trim();
+
+    try{
+
+        const formData = new FormData();
+        formData.append("newMobile", newMobileVal);
+
+        const response = await fetch("../app/api/updateMobile.inc.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+            location.reload();
+        }
+        else{
+            if(result.message){
+                alert(result.message);
+                if(result.auth){
+                    window.location.replace("login.php");
+                }
+            }
+            else if(result.errors){
+                Object.entries(result.errors).forEach(([id, msg]) => {
+                    setFieldError(id, msg, "profile-");
+                })
+            }
+            else{
+                alert("Something Went Wrong. Please try again later");
+            }
+        }
+
+    }catch(err){
+        console.error("profile Error: ",err);
+        alert("Something went wrong. Please try again later");
+    }finally{
+        saveMobileBtn.disabled = false;
+        saveMobileBtn.innerText = "Save";
+    }
+})
+
+const saveAddressBtn = document.querySelector("#profile-saveAddress-btn");
+
+saveAddressBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    clearAllErrors(fieldIds, "profile-");
+    saveAddressBtn.disabled = true;
+    saveAddressBtn.innerText = "Saving...";
+
+    const newAddressVal = document.querySelector("#profile-editAddress").value.trim();
+
+    try{
+
+        const formData = new FormData();
+        formData.append("newAddress", newAddressVal);
+
+        const response = await fetch("../app/api/updateAddress.inc.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+            location.reload();
+        }
+        else{
+            if(result.message){
+                alert(result.message);
+                if(result.auth){
+                    window.location.replace("login.php");
+                }
+            }
+            else if(result.errors){
+                Object.entries(result.errors).forEach(([id, msg]) => {
+                    setFieldError(id, msg, "profile-");
+                })
+            }
+            else{
+                alert("Something Went Wrong. Please try again later");
+            }
+        }
+
+    }catch(err){
+        console.error("profile Error: ",err);
+        alert("Something went wrong. Please try again later");
+    }finally{
+        saveAddressBtn.disabled = false;
+        saveAddressBtn.innerText = "Save";
+    }
+})
+
 
 
 

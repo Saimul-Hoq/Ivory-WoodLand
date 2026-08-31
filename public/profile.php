@@ -41,48 +41,70 @@
             <a href="./dashboard.php" class="btn-icon"><i class="fa-solid fa-angle-left text-xl   "></i></a>
             <h3>Profile</h3>
         </div>
+        <div class="navbar-end">
+            <a href="./logout.php" class="btn btn-ghost"><i class="fa-solid fa-right-from-bracket text-gray"></i><p class="text-xl"> Logout</p></a>
+        </div>
     </div>
     <div class="body-area">
        
         <fieldset id="profile-block" class="fieldset">
             <!-- <legend><i class="fa-solid fa-circle-user"></i></legend> -->
-            
-            <div class="profile-left">
-                <div class="info-field">
-                    <p><span class="text-bold">Name: </span> <?php echo htmlspecialchars($user["name"]??"") ?> </p>
-                    <button id="profile-changeName-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
-                    
+            <div class="profile-heading">
+                <div id="heading-left">
+                    <h3> <?php echo htmlspecialchars($user["name"]??"") ?>  </h3>
+                    <p>
+                        <?php
+                            if($user["role"]===1) {echo "Customer";}
+                            else if($user["role"]===2) {echo "Manager";}
+                            else if($user["role"]===3) {echo "Admin";}
+                        ?>
+                    </p>
                 </div>
-
-                <div class="info-field">
-                    <p><span class="text-bold">Password: </span>*****</p>
-                    <button id="profile-changePassword-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
+                <div id="heading-right">
+                    <!-- <img src="./uploads/profiles/" alt=""> -->
+                    <img src="./uploads/profiles/<?= htmlspecialchars($user["avatar"]) ?>" alt="Profile picture" class="avatar-img">
                 </div>
-
-                <div class="info-field">
-                    <p><span class="text-bold">Email: </span>  <?php echo htmlspecialchars($user["email"] ?? "") ?> </p>
-                    <!-- <button class="btn-icon"><i class="fa-solid fa-angle-right text-xl"></i></button> -->
-                </div>
-              
             </div>
-            
-            <div class="profile-right">
+            <hr>
+            <div class="profile-content">
+                <div class="profile-left">
+                    <div class="info-field">
+                        <p><span class="text-bold">Name: </span> <?php echo htmlspecialchars($user["name"]??"") ?> </p>
+                        <button id="profile-changeName-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
+                        
+                    </div>
+
+                    <div class="info-field">
+                        <p><span class="text-bold">Password: </span>*****</p>
+                        <button id="profile-changePassword-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
+                    </div>
+
+                    <div class="info-field">
+                        <p><span class="text-bold">Email: </span>  <?php echo htmlspecialchars($user["email"] ?? "") ?> </p>
+                        <!-- <button class="btn-icon"><i class="fa-solid fa-angle-right text-xl"></i></button> -->
+                    </div>
                 
-                <div class="info-field">
-                    <p><span class="text-bold">Mobile: </span>  <?php echo htmlspecialchars($user["mobile"] ?? "") ?> </p>
-                    <button id="profile-changeMobile-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md   "></i></button>
                 </div>
+                
+                <div class="profile-right">
+                    
+                    <div class="info-field">
+                        <p><span class="text-bold">Mobile: </span>  <?php echo htmlspecialchars($user["mobile"] ?? "") ?> </p>
+                        <button id="profile-changeMobile-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md   "></i></button>
+                    </div>
 
-                <div class="info-field">
-                    <p><span class="text-bold">Total purchase amount: </span>  <?php echo htmlspecialchars($user["amount"] ?? "") ?> tk</p>
-                    <!-- <button class="btn-icon"><i class="fa-solid fa-angle-right text-xl   "></i></button> -->
+                    <div class="info-field">
+                        <p><span class="text-bold">Total purchase amount: </span>  <?php echo htmlspecialchars($user["amount"] ?? "") ?> tk</p>
+                        <!-- <button class="btn-icon"><i class="fa-solid fa-angle-right text-xl   "></i></button> -->
+                    </div>
+                    <div class="info-field">
+                        <p><span class="text-bold">Address: </span>  <?php echo htmlspecialchars($user["address"] ?? "") ?> </p>
+                        <button id="profile-changeAddress-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
+                    </div>
+                
                 </div>
-                <div class="info-field">
-                    <p><span class="text-bold">Address: </span>  <?php echo htmlspecialchars($user["address"] ?? "") ?> </p>
-                    <button id="profile-changeAddress-btn" class="btn-icon"><i class="fa-solid fa-pen-to-square text-md"></i></button>
-                </div>
-             
             </div>
+            
             
         </fieldset>
 
@@ -109,7 +131,7 @@
         <fieldset id="edit-name" class="fieldset edit-field">
             <label class="label  text-xl">New Name: </label>
             <p id="profile-editName-error"></p>
-            <input id="prfoile-editName"  type="text" class="input" placeholder="Enter new Name" />
+            <input id="profile-editName"  type="text" class="input" placeholder="Enter new Name" />
 
             <div class="btn-container">
                 <button id="profile-cancelName-btn" class="btn btn-neutral">Cancel</button>
@@ -121,7 +143,7 @@
         <fieldset id="edit-mobile" class="fieldset edit-field">
             <label class="label  text-xl">New Mobile Number: </label>
             <p id="profile-editMobile-error"></p>
-            <input id="prfoile-editMobile"  type="text" class="input" placeholder="Enter new Mobile Number" />
+            <input id="profile-editMobile"  type="text" class="input" placeholder="Enter new Mobile Number" />
 
             <div class="btn-container">
                 <button id="profile-cancelMobile-btn" class="btn btn-neutral">Cancel</button>
@@ -133,7 +155,7 @@
         <fieldset id="edit-address" class="fieldset edit-field">
             <label class="label  text-xl">New Address: </label>
             <p id="profile-editAddress-error"></p>
-            <input id="prfoile-editAddress"  type="text" class="input" placeholder="Enter new address" />
+            <input id="profile-editAddress"  type="text" class="input" placeholder="Enter new address" />
 
             <div class="btn-container">
                 <button id="profile-cancelAddress-btn" class="btn btn-neutral">Cancel</button>

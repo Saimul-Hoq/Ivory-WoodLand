@@ -24,3 +24,48 @@ function updatePassword(Object $pdo, string $id, string $password){
     $stmt->execute();
 
 }
+
+
+function updateName(Object $pdo, string $id, string $name){
+
+    $query = "UPDATE user SET name = :name WHERE id = :id;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":id", $id);
+
+    $stmt->execute();
+
+}
+
+function mobileExists($pdo, $id, $mobile){
+
+    $query = "SELECT id FROM user WHERE mobile = :mobile AND id != :id;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":mobile", $mobile);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+}
+
+function updateMobile(Object $pdo, string $id, string $mobile){
+
+    $query = "UPDATE user SET mobile = :mobile WHERE id = :id;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":mobile", $mobile);
+    $stmt->bindParam(":id", $id);
+
+    $stmt->execute();
+
+}
+
+function updateAddress(Object $pdo, string $id, string $address){
+
+    $query = "UPDATE user SET address = :address WHERE id = :id;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":address", $address);
+    $stmt->bindParam(":id", $id);
+
+    $stmt->execute();
+
+}
